@@ -2,7 +2,7 @@
 
 {{ .Content }}
 
-{{/* Intro summary section */}}
+<!-- {{/* Intro summary section */}}
 
 {{ if or .Site.Params.homeIntroTitle .Site.Params.homeIntroContent }}
 <div class="intro">
@@ -14,7 +14,7 @@
     <p>{{ . | markdownify }}</p>
     {{ end }}
 </div>
-{{ end }}
+{{ end }} -->
 
 {{/* Social Icons */}}
 
@@ -35,13 +35,17 @@
 {{ if .Site.Params.homeCollection }}
 
 <div class="list-container">
-    {{ with .Site.Params.homeCollectionTitle}}
+    <!-- {{ with .Site.Params.homeCollectionTitle}}
     <h1> {{ . }} </h1>
-    {{ end }}
+    {{ end }} -->
 
     {{ $pages := where .Site.RegularPages "Section" .Site.Params.homeCollection
     }}
 
+    {{ range $index, $page := $pages }}
+    {{ partial "section.html" $page}}
+    {{ end }}
+<!-- 
     {{ $paginationSize := 1}}
     {{ if (gt .Site.Params.paginationSize 0) }}
     {{ $paginationSize = .Site.Params.paginationSize }}
@@ -50,10 +54,10 @@
     {{ $paginator := .Paginate $pages $paginationSize }}
 
     {{ range $index, $page := $paginator.Pages }}
-    {{ partial "post-entry.html" $page}}
+    {{ partial "section.html" $page}}
     {{ end }}
 
-    {{ partial "pagination-controls.html" $paginator}}
+    {{ partial "pagination-controls.html" $paginator}} -->
 
     {{ end }}
 </div>

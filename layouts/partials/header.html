@@ -5,7 +5,8 @@
     {{ if or (not (.Param "hideHeader")) .IsHome }}
 
     <h1 class="header-title">
-        <a href="{{ site.BaseURL }}">{{ site.Title }}</a>
+        {{ site.Params.header_title }}
+        <!-- <a href="{{ site.BaseURL }}">{{ site.Title }}</a> -->
     </h1>
 
     <div class="flex">
