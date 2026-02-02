@@ -128,11 +128,47 @@ hr {
   margin-bottom: var(--header-bottom-gap);
 }
 
+.header-nav {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  flex-wrap: wrap;
+}
+
+.header-menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .header p {
   font-size: small;
   font-family: var(--font-mono);
   margin-top: var(--header-menu-top-gap);
   margin-right: var(--header-menu-side-gap);
+}
+
+.lang-switch {
+  font-size: small;
+  font-family: var(--font-mono);
+  margin-top: var(--header-menu-top-gap);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.lang-switch a {
+  text-decoration: none;
+}
+
+.lang-current {
+  font-weight: bold;
+}
+
+.lang-sep {
+  opacity: 0.6;
 }
 
 .header-title {

@@ -9,18 +9,43 @@
         <!-- <a href="{{ site.BaseURL }}">{{ site.Title }}</a> -->
     </h1>
 
-    <div class="flex">
+    <div class="header-nav">
         {{ $currentPage := . }}
 
-        {{ with site.Params.menu }}
-        {{ range . }}
-      
-        <p class="small {{ if eq .name (lower $currentPage.Name) }} bold {{end}}">
-            <a href="{{ .url }}" {{ if and (isset . "newTab") .newTab }}target="_blank" rel="noopener noreferrer"{{ end }}>
-                /{{.name }}
-            </a>
-        </p>
-        {{ end }}
+        <div class="header-menu flex">
+            {{ with site.Params.menu }}
+            {{ range . }}
+            <p class="small {{ if eq .name (lower $currentPage.Name) }} bold {{end}}">
+                <a href="{{ .url }}" {{ if and (isset . "newTab") .newTab }}target="_blank" rel="noopener noreferrer"{{ end }}>
+                    /{{.name }}
+                </a>
+            </p>
+            {{ end }}
+            {{ end }}
+        </div>
+
+        {{ if hugo.IsMultilingual }}
+        <div class="lang-switch" aria-label="Language switcher">
+            {{ $current := . }}
+            {{ range $index, $site := .Site.Sites }}
+                {{ if gt $index 0 }}
+                <span class="lang-sep">/</span>
+                {{ end }}
+                {{ $lang := $site.Language.Lang }}
+                {{ $label := $site.Language.LanguageName }}
+                {{ if eq $lang $current.Site.Language.Lang }}
+                    <span class="lang-current">{{ $label }}</span>
+                {{ else }}
+                    {{ $translations := where $current.Translations "Lang" $lang }}
+                    {{ if gt (len $translations) 0 }}
+                        {{ $translation := index $translations 0 }}
+                        <a href="{{ $translation.RelPermalink }}">{{ $label }}</a>
+                    {{ else }}
+                        <a href="{{ $site.Home.RelPermalink }}">{{ $label }}</a>
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        </div>
         {{ end }}
     </div>
 
